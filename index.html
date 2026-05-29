@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>웰다잉 파티 플랫폼 — 마지막이 아닌, 가장 빛나는 날</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1A2744;--navy2:#2C3F6E;--gold:#C9902A;--gold2:#E8AF4E;
+  --orange:#E8651A;--cream:#FAF8F4;--cream2:#F2EDE4;
+  --text:#2C2C2A;--text2:#5A5855;--text3:#9A9693;
+  --green:#1A6B3A;--green2:#EAF3DE;
+  --white:#FFFFFF;--red:#B22222;
+  --shadow:0 4px 24px rgba(26,39,68,0.10);
+  --shadow2:0 8px 40px rgba(26,39,68,0.15);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--text);line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(26,39,68,0.95);backdrop-filter:blur(12px);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Noto Serif KR',serif;font-size:18px;color:var(--gold);font-weight:700;letter-spacing:-0.5px}
+.nav-logo span{color:var(--white)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:13px;font-weight:400;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--navy);padding:8px 20px;border-radius:24px;font-size:13px;font-weight:700;text-decoration:none;transition:background 0.2s}
+.nav-cta:hover{background:var(--gold2)}
+
+/* HERO */
+.hero{min-height:100vh;background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 60%,#3A2510 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding:100px 5% 60px}
+.hero-bg-circle{position:absolute;border-radius:50%;opacity:0.07}
+.hero-bg-circle.c1{width:600px;height:600px;background:var(--gold);top:-200px;right:-100px}
+.hero-bg-circle.c2{width:400px;height:400px;background:var(--orange);bottom:-150px;left:-100px}
+.hero-content{max-width:600px;position:relative;z-index:1;animation:fadeUp 0.9s ease both}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,144,42,0.2);border:1px solid rgba(201,144,42,0.4);color:var(--gold2);padding:6px 16px;border-radius:24px;font-size:12px;font-weight:500;margin-bottom:28px;letter-spacing:0.5px}
+.hero h1{font-family:'Noto Serif KR',serif;font-size:clamp(36px,5vw,56px);color:var(--white);line-height:1.25;font-weight:700;margin-bottom:16px}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero p{font-size:17px;color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:36px;font-weight:300}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:var(--navy);padding:14px 32px;border-radius:30px;font-size:15px;font-weight:700;text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,144,42,0.4)}
+.btn-outline{background:transparent;color:var(--white);padding:14px 32px;border-radius:30px;font-size:15px;font-weight:500;text-decoration:none;border:1.5px solid rgba(255,255,255,0.3);transition:all 0.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-stats{position:absolute;bottom:50px;right:5%;display:flex;gap:32px;z-index:1}
+.stat{text-align:center}
+.stat-num{font-family:'Noto Serif KR',serif;font-size:32px;font-weight:700;color:var(--gold)}
+.stat-label{font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px}
+
+/* SECTIONS */
+section{padding:90px 5%}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-tag{display:inline-block;background:var(--cream2);color:var(--orange);font-size:12px;font-weight:700;padding:5px 14px;border-radius:12px;letter-spacing:1px;margin-bottom:16px;text-transform:uppercase}
+.section-title{font-family:'Noto Serif KR',serif;font-size:clamp(28px,4vw,42px);color:var(--navy);font-weight:700;line-height:1.3;margin-bottom:12px}
+.section-sub{font-size:16px;color:var(--text2);max-width:560px;line-height:1.8}
+
+/* PROCESS FLOW */
+.flow-section{background:var(--white)}
+.flow-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0;margin-top:60px;position:relative}
+.flow-steps::before{content:'';position:absolute;top:52px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));z-index:0}
+.flow-step{text-align:center;position:relative;z-index:1;padding:0 10px}
+.flow-icon{width:80px;height:80px;border-radius:50%;background:var(--navy);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:28px;border:4px solid var(--white);box-shadow:0 0 0 3px var(--gold),var(--shadow)}
+.flow-step.alt .flow-icon{background:var(--gold)}
+.flow-num{position:absolute;top:-8px;right:calc(50% - 52px);width:24px;height:24px;background:var(--orange);color:white;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.flow-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.flow-desc{font-size:12px;color:var(--text2);line-height:1.6}
+.flow-badge{display:inline-block;background:var(--cream2);color:var(--orange);font-size:10px;padding:3px 8px;border-radius:8px;margin-top:8px;font-weight:700}
+
+/* TIMELINE */
+.timeline-section{background:var(--navy)}
+.timeline-section .section-title{color:var(--white)}
+.timeline-section .section-sub{color:rgba(255,255,255,0.6)}
+.timeline-grid{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;margin-top:48px;align-items:start}
+.tl-left,.tl-right{display:flex;flex-direction:column;gap:32px}
+.tl-right{margin-top:80px}
+.tl-center{display:flex;flex-direction:column;align-items:center;gap:0;padding-top:8px}
+.tl-line{width:2px;flex:1;background:linear-gradient(180deg,var(--gold),var(--orange))}
+.tl-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:18px 20px}
+.tl-card.gold{border-color:rgba(201,144,42,0.4);background:rgba(201,144,42,0.08)}
+.tl-time{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;margin-bottom:6px}
+.tl-title{font-size:15px;color:var(--white);font-weight:500;margin-bottom:4px}
+.tl-text{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6}
+.tl-dot{width:14px;height:14px;border-radius:50%;background:var(--gold);border:3px solid var(--navy);margin:12px 0;flex-shrink:0}
+
+/* CALCULATOR */
+.calc-section{background:var(--cream)}
+.calc-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:48px;align-items:start}
+.calc-panel{background:var(--white);border-radius:24px;padding:32px;box-shadow:var(--shadow)}
+.calc-title{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.slider-row{margin-bottom:20px}
+.slider-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.slider-label span{font-size:13px;color:var(--text2)}
+.slider-label strong{font-size:15px;color:var(--navy);font-weight:700}
+input[type=range]{width:100%;height:6px;border-radius:3px;background:var(--cream2);outline:none;-webkit-appearance:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 2px 6px rgba(201,144,42,0.4)}
+input[type=range]::-webkit-slider-runnable-track{border-radius:3px}
+.divider{border:none;border-top:1px solid var(--cream2);margin:20px 0}
+.result-panel{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:24px;padding:32px;color:var(--white)}
+.result-label{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:4px;letter-spacing:0.5px}
+.result-value{font-family:'Noto Serif KR',serif;font-size:28px;font-weight:700;margin-bottom:16px}
+.result-value.gold{color:var(--gold)}
+.result-value.green{color:#5CDB95}
+.result-value.red{color:#FF6B6B}
+.result-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.08);font-size:13px}
+.result-row:last-child{border-bottom:none}
+.result-row span{color:rgba(255,255,255,0.6)}
+.result-row strong{color:var(--white)}
+.result-final{background:rgba(255,255,255,0.08);border-radius:12px;padding:16px;margin-top:16px;text-align:center}
+.profit-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;margin-top:8px}
+.profit-badge.green{background:rgba(92,219,149,0.2);color:#5CDB95}
+.profit-badge.red{background:rgba(255,107,107,0.2);color:#FF6B6B}
+
+/* RSVP ESTIMATOR */
+.rsvp-section{background:var(--white)}
+.rsvp-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:48px}
+.rsvp-input{background:var(--cream);border-radius:24px;padding:32px}
+.rsvp-input h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:20px}
+.guest-type{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--cream2)}
+.guest-type:last-child{border-bottom:none}
+.guest-type-label{font-size:14px;color:var(--text)}
+.guest-type-rate{font-size:11px;color:var(--text3);margin-top:2px}
+.guest-count{display:flex;align-items:center;gap:12px}
+.count-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--navy);background:transparent;color:var(--navy);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;transition:all 0.15s}
+.count-btn:hover{background:var(--navy);color:var(--white)}
+.count-num{font-size:18px;font-weight:700;color:var(--navy);min-width:32px;text-align:center}
+.rsvp-result{background:var(--navy);border-radius:24px;padding:32px;color:var(--white)}
+.rsvp-result h3{font-size:17px;font-weight:700;color:var(--gold);margin-bottom:20px}
+.rsvp-bar-wrap{margin-bottom:16px}
+.rsvp-bar-label{display:flex;justify-content:space-between;margin-bottom:6px}
+.rsvp-bar-label span{font-size:12px;color:rgba(255,255,255,0.6)}
+.rsvp-bar-label strong{font-size:13px;color:var(--white)}
+.rsvp-bar-track{height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden}
+.rsvp-bar-fill{height:100%;border-radius:4px;transition:width 0.5s ease}
+.rsvp-summary{background:rgba(255,255,255,0.07);border-radius:16px;padding:20px;margin-top:20px;text-align:center}
+.rsvp-total{font-family:'Noto Serif KR',serif;font-size:36px;font-weight:700;color:var(--gold)}
+.rsvp-total-label{font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px}
+.rsvp-gift-est{margin-top:16px;font-size:14px;color:rgba(255,255,255,0.8)}
+.rsvp-gift-est strong{color:#5CDB95}
+
+/* INSURANCE */
+.ins-section{background:linear-gradient(135deg,#0F1A35,var(--navy))}
+.ins-section .section-tag{background:rgba(201,144,42,0.2);color:var(--gold2)}
+.ins-section .section-title{color:var(--white)}
+.ins-section .section-sub{color:rgba(255,255,255,0.6)}
+.ins-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:48px}
+.ins-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:28px;transition:all 0.3s;cursor:pointer}
+.ins-card:hover{background:rgba(255,255,255,0.09);border-color:rgba(201,144,42,0.5);transform:translateY(-4px)}
+.ins-card.featured{border-color:rgba(201,144,42,0.5);background:rgba(201,144,42,0.08)}
+.ins-icon{font-size:32px;margin-bottom:16px}
+.ins-title{font-size:17px;font-weight:700;color:var(--white);margin-bottom:8px}
+.ins-desc{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.7;margin-bottom:16px}
+.ins-sim{background:rgba(0,0,0,0.2);border-radius:12px;padding:16px;margin-top:16px}
+.ins-sim-label{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:8px}
+.ins-sim-row{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px}
+.ins-sim-row span{color:rgba(255,255,255,0.6)}
+.ins-sim-row strong{color:var(--gold2)}
+.ins-badge{display:inline-block;background:rgba(201,144,42,0.25);color:var(--gold2);font-size:10px;padding:3px 10px;border-radius:8px;font-weight:700;margin-bottom:12px}
+
+/* PACKAGES */
+.pkg-section{background:var(--cream)}
+.pkg-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.pkg-card{background:var(--white);border-radius:24px;padding:32px;border:2px solid transparent;transition:all 0.3s;cursor:pointer;box-shadow:var(--shadow)}
+.pkg-card:hover,.pkg-card.selected{border-color:var(--gold);transform:translateY(-6px);box-shadow:var(--shadow2)}
+.pkg-card.featured{border-color:var(--navy);position:relative;overflow:hidden}
+.pkg-card.featured::before{content:'인기';position:absolute;top:16px;right:-24px;background:var(--navy);color:var(--gold);font-size:10px;font-weight:700;padding:4px 32px;transform:rotate(45deg)}
+.pkg-emoji{font-size:36px;margin-bottom:16px}
+.pkg-name{font-size:20px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.pkg-target{font-size:12px;color:var(--text3);margin-bottom:20px}
+.pkg-price{font-family:'Noto Serif KR',serif;font-size:32px;font-weight:700;color:var(--gold);margin-bottom:4px}
+.pkg-price-sub{font-size:12px;color:var(--text3);margin-bottom:24px}
+.pkg-features{list-style:none;margin-bottom:28px}
+.pkg-features li{font-size:13px;color:var(--text2);padding:6px 0;border-bottom:1px solid var(--cream2);display:flex;align-items:center;gap:8px}
+.pkg-features li::before{content:'✓';color:var(--green);font-weight:700;font-size:14px}
+.pkg-btn{width:100%;padding:13px;border-radius:30px;font-size:14px;font-weight:700;cursor:pointer;border:none;background:var(--navy);color:var(--white);transition:all 0.2s;font-family:'Noto Sans KR',sans-serif}
+.pkg-btn:hover{background:var(--gold);color:var(--navy)}
+.pkg-card.featured .pkg-btn{background:var(--gold);color:var(--navy)}
+.pkg-card.featured .pkg-btn:hover{background:var(--gold2)}
+
+/* CONTACT CTA */
+.cta-section{background:linear-gradient(135deg,var(--orange),var(--gold));padding:80px 5%;text-align:center}
+.cta-section h2{font-family:'Noto Serif KR',serif;font-size:clamp(28px,4vw,42px);color:var(--white);margin-bottom:12px;font-weight:700}
+.cta-section p{font-size:17px;color:rgba(255,255,255,0.85);margin-bottom:36px}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.cta-btn-white{background:var(--white);color:var(--orange);padding:14px 36px;border-radius:30px;font-size:15px;font-weight:700;text-decoration:none;transition:all 0.2s}
+.cta-btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
+.cta-btn-outline{border:2px solid rgba(255,255,255,0.7);color:var(--white);padding:14px 36px;border-radius:30px;font-size:15px;font-weight:500;text-decoration:none;transition:all 0.2s}
+.cta-btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,0.1)}
+
+/* FOOTER */
+footer{background:var(--navy);color:rgba(255,255,255,0.5);text-align:center;padding:32px;font-size:13px}
+footer strong{color:var(--gold)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:all 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}.reveal-delay-2{transition-delay:0.2s}.reveal-delay-3{transition-delay:0.3s}.reveal-delay-4{transition-delay:0.4s}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .calc-wrapper,.rsvp-wrapper,.pkg-cards{grid-template-columns:1fr}
+  .timeline-grid{grid-template-columns:40px 1fr;gap:0}
+  .tl-left{display:none}
+  .hero-stats{display:none}
+  .flow-steps::before{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">웰다잉 <span>파티</span></div>
+  <ul class="nav-links">
+    <li><a href="#process">행사 안내</a></li>
+    <li><a href="#calculator">비용 계산</a></li>
+    <li><a href="#rsvp">참석자 예측</a></li>
+    <li><a href="#insurance">보험 연계</a></li>
+    <li><a href="#packages">패키지</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">무료 상담</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🌸 대한민국 최초 생전 장례 파티 플랫폼</div>
+    <h1>마지막이 아닌,<br><em>가장 빛나는 날</em></h1>
+    <p>살아있을 때 사랑하는 분들과 함께<br>인생의 가장 특별한 파티를 직접 경험하세요.<br>감사와 사랑을 나누고, 미래까지 준비하는<br>토탈 웰다잉 서비스입니다.</p>
+    <div class="hero-btns">
+      <a href="#calculator" class="btn-primary">✨ 파티 비용 계산하기</a>
+      <a href="#process" class="btn-outline">행사 안내 보기</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">살아서 경험</div></div>
+    <div class="stat"><div class="stat-num">0원</div><div class="stat-label">가능한 본인 부담</div></div>
+    <div class="stat"><div class="stat-num">4H</div><div class="stat-label">행사 시간</div></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="flow-section" id="process">
+<div class="section-inner">
+  <div class="section-tag">SERVICE GUIDE</div>
+  <h2 class="section-title reveal">한 눈에 보는 행사 전 과정</h2>
+  <p class="section-sub reveal reveal-delay-1">상담부터 사후 장례 집행까지, 모든 과정을 함께합니다</p>
+  <div class="flow-steps">
+    <div class="flow-step reveal">
+      <div class="flow-num">1</div>
+      <div class="flow-icon">💬</div>
+      <div class="flow-title">무료 상담</div>
+      <div class="flow-desc">전문 케어 매니저와 1:1 맞춤 상담. 희망 인원·예산·스타일 파악</div>
+      <div class="flow-badge">D-60일</div>
+    </div>
+    <div class="flow-step reveal reveal-delay-1">
+      <div class="flow-num">2</div>
+      <div class="flow-icon alt" style="background:var(--gold)">📋</div>
+      <div class="flow-title">패키지 계약</div>
+      <div class="flow-desc">패키지 선택·에스크로 계좌 개설·장례 위탁 계약 동시 체결</div>
+      <div class="flow-badge">D-45일</div>
+    </div>
+    <div class="flow-step reveal reveal-delay-2">
+      <div class="flow-num">3</div>
+      <div class="flow-icon">💌</div>
+      <div class="flow-title">초대장 발송</div>
+      <div class="flow-desc">카카오톡+종이 초대장 제작·발송. RSVP 링크 포함, 온라인 부의금 사전 오픈</div>
+      <div class="flow-badge">D-30일</div>
+    </div>
+    <div class="flow-step reveal reveal-delay-3">
+      <div class="flow-num">4</div>
+      <div class="flow-icon alt" style="background:var(--orange)">🎉</div>
+      <div class="flow-title">행사 당일</div>
+      <div class="flow-desc">4시간 파티: 입장→회고영상→감사편지→피로연→장례 위탁 서명</div>
+      <div class="flow-badge">D-Day</div>
+    </div>
+    <div class="flow-step reveal reveal-delay-4">
+      <div class="flow-num">5</div>
+      <div class="flow-icon">💰</div>
+      <div class="flow-title">부의금 정산</div>
+      <div class="flow-desc">에스크로 3분할: 고객 반환 60% · 장례 적립 30% · 수수료 10%</div>
+      <div class="flow-badge">D+3일</div>
+    </div>
+    <div class="flow-step reveal reveal-delay-4">
+      <div class="flow-num">6</div>
+      <div class="flow-icon" style="background:var(--green)">🕊️</div>
+      <div class="flow-title">장례 집행</div>
+      <div class="flow-desc">사망 신호 → 적립금으로 실제 장례 자동 집행. 유족 별도 준비 불필요</div>
+      <div class="flow-badge">사후</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="timeline">
+<div class="section-inner">
+  <div class="section-tag reveal" style="background:rgba(201,144,42,0.2);color:var(--gold2)">TIMELINE</div>
+  <h2 class="section-title reveal">행사 당일 4시간 타임라인</h2>
+  <p class="section-sub reveal reveal-delay-1">결혼식처럼 세밀하게 기획된 당신만의 특별한 하루</p>
+  <div class="timeline-grid" style="margin-top:48px">
+    <div class="tl-left">
+      <div class="tl-card reveal">
+        <div class="tl-time">00:00 — 00:30</div>
+        <div class="tl-title">🎗️ 레드카펫 입장</div>
+        <div class="tl-text">VIP 입장 · 포토존 촬영 · 방명록 작성 · 부의금 공식 접수</div>
+      </div>
+      <div class="tl-card reveal gold">
+        <div class="tl-time">01:10 — 01:40</div>
+        <div class="tl-title">💌 감사의 시간</div>
+        <div class="tl-text">주인공의 감사 편지 낭독 · 가족 발표 · 건배사 · 눈물과 웃음</div>
+      </div>
+      <div class="tl-card reveal">
+        <div class="tl-time">03:00 — 03:30</div>
+        <div class="tl-title">📝 미래 준비</div>
+        <div class="tl-text">장례 위탁 서명식 · 종신보험 안내 · 디지털 추모관 오픈</div>
+      </div>
+    </div>
+    <div class="tl-center">
+      <div class="tl-dot"></div>
+      <div class="tl-line"></div>
+      <div class="tl-dot"></div>
+      <div class="tl-line"></div>
+      <div class="tl-dot"></div>
+      <div class="tl-line"></div>
+      <div class="tl-dot"></div>
+      <div class="tl-line"></div>
+      <div class="tl-dot"></div>
+    </div>
+    <div class="tl-right">
+      <div class="tl-card reveal gold">
+        <div class="tl-time">00:30 — 01:10</div>
+        <div class="tl-title">🎬 생애 회고 상영</div>
+        <div class="tl-text">AI 편집 회고 영상 · 인생 포토 전시 · 주요 장면 소개</div>
+      </div>
+      <div class="tl-card reveal">
+        <div class="tl-time">01:40 — 03:00</div>
+        <div class="tl-title">🍽️ 피로연 & 담소</div>
+        <div class="tl-text">한정식 코스 or 뷔페 · 테이블 토크 · 자유 사진 · 온라인 중계</div>
+      </div>
+      <div class="tl-card reveal gold">
+        <div class="tl-time">03:30 — 04:00</div>
+        <div class="tl-title">🌸 마무리</div>
+        <div class="tl-text">단체 기념사진 · 답례품 증정 · 따뜻한 배웅 · 감사 문자 자동 발송</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calc-section" id="calculator">
+<div class="section-inner">
+  <div class="section-tag">CALCULATOR</div>
+  <h2 class="section-title reveal">파티 비용 & 수지 계산기</h2>
+  <p class="section-sub reveal reveal-delay-1">슬라이더를 움직여 예상 비용과 수익을 직접 확인해보세요</p>
+  <div class="calc-wrapper">
+    <div class="calc-panel reveal">
+      <div class="calc-title">⚙️ 조건 설정</div>
+
+      <div class="slider-row">
+        <div class="slider-label"><span>패키지</span><strong id="pkg-name-show">프리미엄</strong></div>
+        <input type="range" min="0" max="2" step="1" value="1" id="sl-pkg" oninput="calcUpdate()">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:4px"><span>베이직</span><span>프리미엄</span><span>로열</span></div>
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-label"><span>오프라인 참석자</span><strong id="v-guests">30명</strong></div>
+        <input type="range" min="10" max="100" step="5" value="30" id="sl-guests" oninput="calcUpdate()">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-label"><span>1인당 부의금</span><strong id="v-gift">10만원</strong></div>
+        <input type="range" min="3" max="30" step="1" value="10" id="sl-gift" oninput="calcUpdate()">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-label"><span>온라인 참여자</span><strong id="v-online">50명</strong></div>
+        <input type="range" min="0" max="300" step="10" value="50" id="sl-online" oninput="calcUpdate()">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-label"><span>온라인 부의금</span><strong id="v-ogift">5만원</strong></div>
+        <input type="range" min="1" max="15" step="1" value="5" id="sl-ogift" oninput="calcUpdate()">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-label"><span>협찬금 (보험사·장례사)</span><strong id="v-sponsor">200만원</strong></div>
+        <input type="range" min="0" max="600" step="50" value="200" id="sl-sponsor" oninput="calcUpdate()">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-label"><span>피로연 1인 단가</span><strong id="v-food">6만원</strong></div>
+        <input type="range" min="3" max="12" step="1" value="6" id="sl-food" oninput="calcUpdate()">
+      </div>
+    </div>
+
+    <div class="result-panel reveal reveal-delay-1">
+      <div class="result-label">총 행사 비용</div>
+      <div class="result-value red" id="r-cost">—</div>
+      <div class="result-label">총 수입 합계</div>
+      <div class="result-value gold" id="r-income">—</div>
+      <hr style="border-color:rgba(255,255,255,0.1);margin:16px 0">
+      <div class="result-row"><span>오프라인 부의금</span><strong id="r-off">—</strong></div>
+      <div class="result-row"><span>온라인 부의금</span><strong id="r-onl">—</strong></div>
+      <div class="result-row"><span>협찬금</span><strong id="r-sp">—</strong></div>
+      <div class="result-row"><span>패키지·기획비</span><strong id="r-pkg">—</strong></div>
+      <div class="result-row"><span>피로연 식음료</span><strong id="r-food">—</strong></div>
+      <div class="result-row"><span>플랫폼 수수료 (10%)</span><strong id="r-fee">—</strong></div>
+      <div class="result-final">
+        <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:6px">고객 순수령 (부의금 반환 60%)</div>
+        <div style="font-family:'Noto Serif KR',serif;font-size:32px;font-weight:700;color:var(--gold)" id="r-return">—</div>
+        <div id="r-badge"></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:8px">장례 적립금 <strong style="color:rgba(255,255,255,0.7)" id="r-funeral">—</strong> 별도 보관</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- RSVP ESTIMATOR -->
+<section class="rsvp-section" id="rsvp">
+<div class="section-inner">
+  <div class="section-tag">RSVP ESTIMATOR</div>
+  <h2 class="section-title reveal">참석자 수 예측기</h2>
+  <p class="section-sub reveal reveal-delay-1">관계별 인원을 입력하면 실제 참석 예상 인원과 부의금 총액을 자동 계산합니다</p>
+  <div class="rsvp-wrapper">
+    <div class="rsvp-input reveal">
+      <h3>👥 관계별 초대 인원</h3>
+      <div id="guest-types"></div>
+      <div style="margin-top:20px;padding:14px;background:var(--white);border-radius:12px;text-align:center">
+        <div style="font-size:12px;color:var(--text3);margin-bottom:4px">총 초대 인원</div>
+        <div style="font-size:28px;font-weight:700;color:var(--navy)" id="total-invite">0명</div>
+      </div>
+    </div>
+    <div class="rsvp-result reveal reveal-delay-1">
+      <h3>📊 예측 결과</h3>
+      <div id="rsvp-bars"></div>
+      <div class="rsvp-summary">
+        <div class="rsvp-total" id="rsvp-total-num">0</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.5)">명 참석 예상</div>
+        <div class="rsvp-gift-est">예상 부의금 총액<br><strong id="rsvp-gift-total">0만원</strong></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:8px">온라인 참여 시 추가 수익 가능</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- INSURANCE -->
+<section class="ins-section" id="insurance">
+<div class="section-inner">
+  <div class="section-tag">INSURANCE</div>
+  <h2 class="section-title reveal">보험 연계 시뮬레이터</h2>
+  <p class="section-sub reveal reveal-delay-1">종신보험과 연계하면 사후 장례비 걱정 없이 완벽하게 준비됩니다</p>
+  <div class="ins-cards">
+    <div class="ins-card reveal">
+      <div class="ins-icon">💰</div>
+      <div class="ins-badge">방식 1</div>
+      <div class="ins-title">부의금 → 보험료 납입</div>
+      <div class="ins-desc">행사 당일 받은 부의금 일부를 종신보험료로 납입합니다. 별도 자금 부담 없이 사망보험금으로 장례비를 충당합니다.</div>
+      <div class="ins-sim">
+        <div class="ins-sim-label">시뮬레이션 (부의금 1,000만원 기준)</div>
+        <div class="ins-sim-row"><span>보험료 납입 (30%)</span><strong>300만원</strong></div>
+        <div class="ins-sim-row"><span>예상 사망보험금</span><strong>5,000만원~</strong></div>
+        <div class="ins-sim-row"><span>장례비 충당</span><strong style="color:#5CDB95">완전 충당 ✓</strong></div>
+      </div>
+    </div>
+    <div class="ins-card featured reveal reveal-delay-1">
+      <div class="ins-icon">🛡️</div>
+      <div class="ins-badge">방식 2 — 추천</div>
+      <div class="ins-title">선납 + 보험금 자동 지급</div>
+      <div class="ins-desc">플랫폼이 장례비를 할인가로 사전 계약합니다. 종신보험 가입 후 보험금이 플랫폼에 직접 지급되어 유족 부담이 전혀 없습니다.</div>
+      <div class="ins-sim">
+        <div class="ins-sim-label">시뮬레이션</div>
+        <div class="ins-sim-row"><span>장례 사전 계약가</span><strong>800만원</strong></div>
+        <div class="ins-sim-row"><span>사망보험금 지급</span><strong>3,000만원</strong></div>
+        <div class="ins-sim-row"><span>유족 추가 부담</span><strong style="color:#5CDB95">0원 ✓</strong></div>
+      </div>
+    </div>
+    <div class="ins-card reveal reveal-delay-2">
+      <div class="ins-icon">📈</div>
+      <div class="ins-badge">방식 3</div>
+      <div class="ins-title">사망보험금 유동화 연계</div>
+      <div class="ins-desc">2026년부터 전 생보사로 확대된 사망보험금 유동화 제도를 활용합니다. 생전에 연금으로 수령하여 파티 비용으로 사용합니다.</div>
+      <div class="ins-sim">
+        <div class="ins-sim-label">시뮬레이션 (55세 이상)</div>
+        <div class="ins-sim-row"><span>종신보험 해약환급금</span><strong>5,000만원</strong></div>
+        <div class="ins-sim-row"><span>월 수령액 (10년)</span><strong>42만원/월</strong></div>
+        <div class="ins-sim-row"><span>파티 비용 활용</span><strong style="color:#5CDB95">가능 ✓</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:28px;margin-top:32px" class="reveal">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;text-align:center">
+      <div>
+        <div style="font-size:32px;font-weight:700;color:var(--gold);font-family:'Noto Serif KR',serif">0원</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px">보험 연계 시 유족 장례비 부담</div>
+      </div>
+      <div>
+        <div style="font-size:32px;font-weight:700;color:var(--gold);font-family:'Noto Serif KR',serif">100%</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px">자동 집행 (유족 개입 불필요)</div>
+      </div>
+      <div>
+        <div style="font-size:32px;font-weight:700;color:var(--gold);font-family:'Noto Serif KR',serif">3개사</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px">제휴 보험사 (상담 시 안내)</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PACKAGES -->
+<section class="pkg-section" id="packages">
+<div class="section-inner">
+  <div class="section-tag">PACKAGES</div>
+  <h2 class="section-title reveal">패키지 안내</h2>
+  <p class="section-sub reveal reveal-delay-1">모든 패키지에 장례 위탁 계약과 에스크로 서비스가 기본 포함됩니다</p>
+  <div class="pkg-cards">
+    <div class="pkg-card reveal">
+      <div class="pkg-emoji">💛</div>
+      <div class="pkg-name">베이직</div>
+      <div class="pkg-target">가족 중심 소규모 · 10~20명</div>
+      <div class="pkg-price">300만원~</div>
+      <div class="pkg-price-sub">피로연 식음료 별도</div>
+      <ul class="pkg-features">
+        <li>행사 기획·진행 (2시간)</li>
+        <li>포토북 제작 (30p)</li>
+        <li>회고 영상 (5분)</li>
+        <li>에스크로 부의금 관리</li>
+        <li>장례 위탁 계약 포함</li>
+        <li>디지털 초대장</li>
+      </ul>
+      <button class="pkg-btn" onclick="selectPackage('베이직')">상담 신청하기</button>
+    </div>
+    <div class="pkg-card featured reveal reveal-delay-1">
+      <div class="pkg-emoji">💜</div>
+      <div class="pkg-name">프리미엄</div>
+      <div class="pkg-target">친구·지인 포함 · 20~50명</div>
+      <div class="pkg-price">700만원~</div>
+      <div class="pkg-price-sub">피로연 식음료 별도</div>
+      <ul class="pkg-features">
+        <li>행사 기획·진행 (4시간)</li>
+        <li>포토북 (100p) + 종이 초대장</li>
+        <li>회고 영상 (15분)</li>
+        <li>라이브 스트리밍 서비스</li>
+        <li>참석자 선물 패키지</li>
+        <li>종신보험 설계 상담</li>
+        <li>에스크로 + 장례 위탁 포함</li>
+      </ul>
+      <button class="pkg-btn" onclick="selectPackage('프리미엄')">상담 신청하기</button>
+    </div>
+    <div class="pkg-card reveal reveal-delay-2">
+      <div class="pkg-emoji">💎</div>
+      <div class="pkg-name">로열</div>
+      <div class="pkg-target">VIP 맞춤 기획 · 50~100명</div>
+      <div class="pkg-price">1,500만원~</div>
+      <div class="pkg-price-sub">피로연 식음료 포함 협의</div>
+      <ul class="pkg-features">
+        <li>풀 맞춤 기획 (종일)</li>
+        <li>전문 다큐멘터리 제작</li>
+        <li>AI 디지털 추모관 (영구)</li>
+        <li>언론 홍보 지원</li>
+        <li>전담 케어 매니저</li>
+        <li>VIP 장례 집행 패키지</li>
+        <li>종신보험 최적 설계 포함</li>
+      </ul>
+      <button class="pkg-btn" onclick="selectPackage('로열')">상담 신청하기</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>지금 바로 무료 상담을 시작하세요</h2>
+  <p>전문 케어 매니저가 맞춤 플랜을 설계해드립니다</p>
+  <div class="cta-btns">
+    <a href="tel:0212345678" class="cta-btn-white">📞 전화 상담 (02-1234-5678)</a>
+    <a href="#calculator" class="cta-btn-outline">💻 온라인 계산기 다시 보기</a>
+  </div>
+</section>
+
+<footer>
+  <strong>웰다잉 파티 플랫폼</strong> &nbsp;|&nbsp; "마지막이 아닌, 가장 빛나는 날"<br>
+  <span style="font-size:11px;margin-top:8px;display:block">선불식 할부거래업 등록 예정 · 보험대리점 등록 예정 · BM특허 출원 예정</span>
+</footer>
+
+<script>
+/* ── REVEAL ── */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── CALCULATOR ── */
+const pkgs=[
+  {name:'베이직',price:300,food_base:4},
+  {name:'프리미엄',price:700,food_base:6},
+  {name:'로열',price:1500,food_base:8}
+];
+function f(n){return Math.round(n).toLocaleString();}
+function calcUpdate(){
+  const pi=+document.getElementById('sl-pkg').value;
+  const p=pkgs[pi];
+  const guests=+document.getElementById('sl-guests').value;
+  const gift=+document.getElementById('sl-gift').value;
+  const online=+document.getElementById('sl-online').value;
+  const ogift=+document.getElementById('sl-ogift').value;
+  const sponsor=+document.getElementById('sl-sponsor').value;
+  const food=+document.getElementById('sl-food').value;
+
+  document.getElementById('pkg-name-show').textContent=p.name;
+  document.getElementById('v-guests').textContent=guests+'명';
+  document.getElementById('v-gift').textContent=gift+'만원';
+  document.getElementById('v-online').textContent=online+'명';
+  document.getElementById('v-ogift').textContent=ogift+'만원';
+  document.getElementById('v-sponsor').textContent=sponsor+'만원';
+  document.getElementById('v-food').textContent=food+'만원';
+
+  const off=guests*gift, onl=online*ogift;
+  const totalIncome=off+onl+sponsor;
+  const foodCost=guests*food;
+  const totalCost=p.price+foodCost;
+  const fee=Math.round(totalIncome*0.1);
+  const returnAmt=Math.round(totalIncome*0.6);
+  const funeralAmt=Math.round(totalIncome*0.3);
+  const net=returnAmt-totalCost;
+
+  document.getElementById('r-cost').textContent=f(totalCost)+'만원';
+  document.getElementById('r-income').textContent=f(totalIncome)+'만원';
+  document.getElementById('r-off').textContent='+'+f(off)+'만원';
+  document.getElementById('r-onl').textContent='+'+f(onl)+'만원';
+  document.getElementById('r-sp').textContent='+'+f(sponsor)+'만원';
+  document.getElementById('r-pkg').textContent='−'+f(p.price)+'만원';
+  document.getElementById('r-food').textContent='−'+f(foodCost)+'만원';
+  document.getElementById('r-fee').textContent='−'+f(fee)+'만원';
+  document.getElementById('r-return').textContent=(net>=0?'+':'')+f(net)+'만원';
+  document.getElementById('r-funeral').textContent=f(funeralAmt)+'만원';
+  const badge=document.getElementById('r-badge');
+  badge.innerHTML=`<span class="profit-badge ${net>=0?'green':'red'}">${net>=0?'흑자 — 남는 구조!':'적자 — 조건 조정 필요'}</span>`;
+}
+calcUpdate();
+
+/* ── RSVP ── */
+const guestTypes=[
+  {label:'직계 가족',rate:0.95,num:10,color:'#5CDB95'},
+  {label:'형제·친척',rate:0.80,num:15,color:'#4fa8f5'},
+  {label:'절친한 친구',rate:0.70,num:10,color:'#C9902A'},
+  {label:'직장 동료',rate:0.50,num:20,color:'#E8651A'},
+  {label:'지인·이웃',rate:0.40,num:10,color:'#A78BFA'},
+];
+function renderGuestTypes(){
+  document.getElementById('guest-types').innerHTML=guestTypes.map((g,i)=>`
+    <div class="guest-type">
+      <div><div class="guest-type-label">${g.label}</div><div class="guest-type-rate">참석률 약 ${Math.round(g.rate*100)}%</div></div>
+      <div class="guest-count">
+        <button class="count-btn" onclick="adjustGuest(${i},-5)">−</button>
+        <div class="count-num" id="gn-${i}">${g.num}</div>
+        <button class="count-btn" onclick="adjustGuest(${i},5)">+</button>
+      </div>
+    </div>
+  `).join('');
+  updateRSVP();
+}
+function adjustGuest(i,d){
+  guestTypes[i].num=Math.max(0,guestTypes[i].num+d);
+  document.getElementById('gn-'+i).textContent=guestTypes[i].num;
+  updateRSVP();
+}
+function updateRSVP(){
+  const total=guestTypes.reduce((a,g)=>a+g.num,0);
+  document.getElementById('total-invite').textContent=total+'명';
+  const expected=guestTypes.reduce((a,g)=>a+Math.round(g.num*g.rate),0);
+  const giftTotal=expected*10;
+  document.getElementById('rsvp-total-num').textContent=expected;
+  document.getElementById('rsvp-gift-total').textContent=f(giftTotal)+'만원';
+  document.getElementById('rsvp-bars').innerHTML=guestTypes.map((g,i)=>{
+    const exp=Math.round(g.num*g.rate);
+    const pct=g.num>0?Math.round(exp/g.num*100):0;
+    return `<div class="rsvp-bar-wrap">
+      <div class="rsvp-bar-label"><span>${g.label} (${g.num}명 초대)</span><strong>${exp}명 참석 예상</strong></div>
+      <div class="rsvp-bar-track"><div class="rsvp-bar-fill" style="width:${pct}%;background:${g.color}"></div></div>
+    </div>`;
+  }).join('');
+}
+renderGuestTypes();
+
+/* ── PACKAGE SELECT ── */
+function selectPackage(name){
+  alert('📞 "+name+" 패키지 상담 신청이 접수되었습니다.\n전문 케어 매니저가 24시간 내 연락드립니다.');
+}
+</script>
+</body>
+</html>
